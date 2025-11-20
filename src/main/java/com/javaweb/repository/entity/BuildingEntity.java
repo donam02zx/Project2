@@ -1,0 +1,34 @@
+package com.javaweb.repository.entity;
+
+public class BuildingEntity {
+	private String name;
+	private Integer numberofbasement;
+	private String street;
+	private String ward;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getNumberofbasement() {
+		return numberofbasement;
+	}
+	public void setNumberofbasement(Integer numberofbasement) {
+		this.numberofbasement = numberofbasement;
+	}
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public String getWard() {
+		return ward;
+	}
+	public void setWard(String ward) {
+		this.ward = ward;
+	}
+	
+	
+}
