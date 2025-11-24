@@ -1,15 +1,28 @@
 package com.javaweb.model;
 
+import java.util.List;
+
 public class BuildingDTO {
-	private String name;
-	private Integer numberofbasement;
+	private String namebuilding;
 	private String address;
-	
-	public String getName() {
-		return name;
+	private Integer numberofbasement;
+	private String namemanager;
+	private String numbermanager;
+	private Integer floorarea;
+	private Integer rentprice;
+	private Integer servicefee;
+	private List<Integer> rentarea;
+	public String getNamebuilding() {
+		return namebuilding;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNamebuilding(String namebuilding) {
+		this.namebuilding = namebuilding;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public Integer getNumberofbasement() {
 		return numberofbasement;
@@ -17,11 +30,42 @@ public class BuildingDTO {
 	public void setNumberofbasement(Integer numberofbasement) {
 		this.numberofbasement = numberofbasement;
 	}
-	public String getAddress() {
-		return address;
+	public String getNamemanager() {
+		return namemanager;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setNamemanager(String namemanager) {
+		this.namemanager = namemanager;
+	}
+	public String getNumbermanager() {
+		return numbermanager;
+	}
+	public void setNumbermanager(String numbermanager) {
+		this.numbermanager = numbermanager;
+	}
+	public Integer getFloorarea() {
+		return floorarea;
+	}
+	public void setFloorarea(Integer floorarea) {
+		this.floorarea = floorarea;
+	}
+	public Integer getRentprice() {
+		return rentprice;
+	}
+	public void setRentprice(Integer rentprice) {
+		this.rentprice = rentprice;
+	}
+	
+	public Integer getServicefee() {
+		return servicefee;
+	}
+	public void setServicefee(Integer servicefee) {
+		this.servicefee = servicefee;
+	}
+	public List<Integer> getRentarea() {
+		return rentarea;
+	}
+	public void setRentarea(List<Integer> rentarea) {
+		this.rentarea = rentarea;
 	}
 	
 	

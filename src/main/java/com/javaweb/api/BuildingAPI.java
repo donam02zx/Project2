@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.customexceptions.FieldRequiredException;
 import com.javaweb.model.BuildingDTO;
+import com.javaweb.model.BuildingSearchRequest;
 import com.javaweb.model.ErrorResponseDTO;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.entity.BuildingEntity;
@@ -58,10 +59,8 @@ public class BuildingAPI {
 	
 	
 	@GetMapping(value="/api/building/")
-	public List<BuildingDTO> getBuilding(@RequestParam(name="name") String name,
-										 @RequestParam(name="districtId") Integer id,
-										 @RequestParam(name="typeCode") List<String> typeCode){
-		List<BuildingDTO> result = buildingResponse.findAll(name,id);
+	public List<BuildingDTO> getBuilding(BuildingSearchRequest request){
+		List<BuildingDTO> result = buildingResponse.findAll(request);
 		return result;
 	}
 	
