@@ -12,6 +12,14 @@ public class BuildingDTO {
 	private Integer rentprice;
 	private Integer servicefee;
 	private List<Integer> rentarea;
+	private List<String> renttype;
+	
+	public List<String> getRenttype() {
+		return renttype;
+	}
+	public void setRenttype(List<String> renttype) {
+		this.renttype = renttype;
+	}
 	public String getNamebuilding() {
 		return namebuilding;
 	}

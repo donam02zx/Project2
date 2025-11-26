@@ -34,7 +34,7 @@ public class BuildingServiceImpl implements BuildingService{
 			building.setRentarea(item.getRentarea());
 			building.setRentprice(item.getRentprice());
 			building.setServicefee(item.getServicefee());
-			building.setRentarea(item.getRentarea());
+			building.setRenttype(item.getRenttype());
 			result.add(building);
 		}
 		

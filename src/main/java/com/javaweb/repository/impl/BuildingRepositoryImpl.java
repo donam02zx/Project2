@@ -23,12 +23,16 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 	@Override
 	public List<BuildingEntity> findAll(BuildingSearchRequest request) {
 		List<BuildingEntity> result = new ArrayList<BuildingEntity>();
-		StringBuilder select = new StringBuilder("SELECT b.*, d.name AS district_name, GROUP_CONCAT(ra.value) AS rentarea_list ");
+		StringBuilder select = new StringBuilder("SELECT b.*, d.name AS district_name, "
+											+ "GROUP_CONCAT(DISTINCT ra.value) AS rentarea_list, "
+											+ "GROUP_CONCAT(DISTINCT rt.code) AS renttype_list  ");
 		StringBuilder from = new StringBuilder("FROM building b " );
 		StringBuilder where = new StringBuilder("Where 1=1 ");
 		StringBuilder group = new StringBuilder("Group by b.id ");
 		from.append("LEFT JOIN district d ON d.id = b.districtid ");
 		from.append("LEFT JOIN rentarea ra ON ra.buildingid = b.id ");
+		from.append("LEFT JOIN buildingrenttype brt ON brt.buildingid = b.id ");
+		from.append("LEFT JOIN renttype rt ON rt.id = brt.renttypeid ");
 		if(request.getNameBuilding()!=null&&!request.getNameBuilding().isEmpty()) {
 			where.append("AND b.name like '%"+request.getNameBuilding()+"%' ");
 		}
@@ -56,7 +60,7 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 			where.append("AND b.level = "+request.getLevel()).append(" ");
 		}
 		if(request.getRentAreaFrom()!=null&&request.getRentAreaTo()!=null) {
-			select.append(", ra.value AS value ");
+//			select.append(", ra.value AS value ");
 //			from.append("LEFT JOIN rentarea ra ON ra.buildingid = b.id ");
 			where.append("AND ra.value >= "+request.getRentAreaFrom()).append(" AND ra.value <= "+request.getRentAreaTo()).append(" ");
 		}
@@ -92,9 +96,15 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 		}
 		if(request.getRentType()!=null&&!request.getRentType().isEmpty()) {
 //			select.append(", rt.name AS rentype_name ");
-			from.append("LEFT JOIN buildingrenttype brt ON brt.buildingid = b.id ").append("JOIN renttype rt ON rt.id = brt.renttypeid ");
-			where.append("AND brt.buildingid = b.id AND rt.id = brt.renttypeid ");
-			where.append("AND rt.code = '"+request.getRentType()+"'").append(" ");
+//			from.append("LEFT JOIN buildingrenttype brt ON brt.buildingid = b.id ").append("LEFT JOIN renttype rt ON rt.id = brt.renttypeid ");
+//			where.append("AND brt.buildingid = b.id AND rt.id = brt.renttypeid ");
+//			where.append("AND rt.code = '"+request.getRentType()+"'").append(" ");
+			StringBuilder renttypeList = new StringBuilder();
+			for(int i=0;i<request.getRentType().size();i++) {
+				if(i>0) renttypeList.append(", ");
+				renttypeList.append("'"+request.getRentType().get(i)+"'");
+			}
+			where.append("AND rt.code IN ("+renttypeList.toString()+") ");
 		}
 		try {
 			Connection con = (Connection) DriverManager.getConnection(url, username, password);
@@ -135,18 +145,15 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 					rentarea.add(Integer.parseInt(value));
 				}
 				building.setRentarea(rentarea);
-//				try {
-//					building.setRenttype(rs.getString("rentype_name"));
-//				} catch (SQLException e) {
-//					System.out.println(e.getMessage());
-//				}
-//				String renttypeStr = rs.getString("renttype_list");
-//				String[] codes = renttypeStr.split(",");
-//				List<String> renttype = new ArrayList<String>();
-//				for(String code : codes) {
-//					renttype.add(code);
-//				}
-//				building.setRenttype(renttype);
+				
+				String renttypeStr = rs.getString("renttype_list");
+				String[] codes = renttypeStr.split(",");
+				List<String> renttype = new ArrayList<String>();
+				for(String code : codes) {
+					renttype.add(code);
+				}
+				building.setRenttype(renttype);
+				
 				result.add(building);
 			}
 		} catch (SQLException e) {
