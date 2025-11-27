@@ -64,25 +64,25 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 //			from.append("LEFT JOIN rentarea ra ON ra.buildingid = b.id ");
 			where.append("AND ra.value >= "+request.getRentAreaFrom()).append(" AND ra.value <= "+request.getRentAreaTo()).append(" ");
 		}
-//		if(request.getRentAreaFrom()!=null) {
-////			select.append(", ra.value ");
-////			from.append("JOIN  rentarea ra ON ra.buildingid = b.id ");
-//			where.append("AND ra.value = "+request.getRentAreaFrom()).append(" ");
-//		}
-//		if(request.getRentAreaTo()!=null) {
-////			select.append(", ra.value ");
-////			from.append("JOIN  rentarea ra ON ra.buildingid = b.id ");
-//			where.append("AND ra.value = "+request.getRentAreaTo()).append(" ");
-//		}
+		if(request.getRentAreaFrom()!=null) {
+//			select.append(", ra.value ");
+//			from.append("JOIN  rentarea ra ON ra.buildingid = b.id ");
+			where.append("AND ra.value = "+request.getRentAreaFrom()).append(" ");
+		}
+		if(request.getRentAreaTo()!=null) {
+//			select.append(", ra.value ");
+//			from.append("JOIN  rentarea ra ON ra.buildingid = b.id ");
+			where.append("AND ra.value = "+request.getRentAreaTo()).append(" ");
+		}
 		if(request.getRentPriceFrom()!=null&&request.getRentPriceTo()!=null) {
 			where.append("AND b.rentprice >= "+request.getRentPriceFrom()).append(" AND b.rentprice <= "+request.getRentPriceTo()).append(" ");
 		}
-//		if(request.getRentPriceFrom()!=null) {
-//			where.append("AND b.rentprice = "+request.getRentPriceFrom()).append(" ");
-//		}
-//		if(request.getRentPriceTo()!=null) {
-//			where.append("AND b.rentprice = "+request.getRentPriceTo()).append(" ");
-//		}
+		if(request.getRentPriceFrom()!=null) {
+			where.append("AND b.rentprice = "+request.getRentPriceFrom()).append(" ");
+		}
+		if(request.getRentPriceTo()!=null) {
+			where.append("AND b.rentprice = "+request.getRentPriceTo()).append(" ");
+		}
 		if(request.getNameManager()!=null&&!request.getNameManager().isEmpty()) {
 			where.append("AND b.managername = '"+request.getNameManager()+"'").append(" ");
 		}
