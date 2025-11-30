@@ -2,6 +2,7 @@ package com.javaweb.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,9 @@ public class BuildingServiceImpl implements BuildingService{
 
 	
 	@Override
-	public List<BuildingDTO> findAll(BuildingSearchRequest request) {
+	public List<BuildingDTO> findAll(Map<String,Object> param, List<String> typeCode) {
 		List<BuildingDTO> result = new ArrayList<BuildingDTO>();
-		List<BuildingEntity> buildingEntities = buildingResponse.findAll(request);
+		List<BuildingEntity> buildingEntities = buildingResponse.findAll(param,typeCode);
 		for(BuildingEntity item : buildingEntities) {
 			BuildingDTO building = new BuildingDTO();
 			building.setNamebuilding(item.getNamebuilding());

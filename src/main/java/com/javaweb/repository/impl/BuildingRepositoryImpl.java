@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 	static final String password = "123123";
 	
 	@Override
-	public List<BuildingEntity> findAll(BuildingSearchRequest request) {
+	public List<BuildingEntity> findAll(Map<String,Object> param, List<String> typeCode) {
 		List<BuildingEntity> result = new ArrayList<BuildingEntity>();
 		StringBuilder select = new StringBuilder("SELECT b.*, d.name AS district_name, "
 											+ "GROUP_CONCAT(DISTINCT ra.value) AS rentarea_list, "
