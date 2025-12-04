@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.customexceptions.FieldRequiredException;
 import com.javaweb.model.BuildingDTO;
-import com.javaweb.model.BuildingSearchRequest;
 import com.javaweb.model.ErrorResponseDTO;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.entity.BuildingEntity;

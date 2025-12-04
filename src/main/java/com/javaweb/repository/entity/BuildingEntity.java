@@ -3,53 +3,36 @@ package com.javaweb.repository.entity;
 import java.util.List;
 
 public class BuildingEntity {
-	private String namebuilding;
-	private Integer numberofbasement;
+	private Long id;
+	private String name;
+	private Long numberofbasement;
 	private String street;
 	private String ward;
-	private Integer districtid;
-	private String districtname;
-	private Integer floorarea;
+	private Long districtid;
+	private Long floorarea;
 	private String direction;
 	private String level;
-	private Integer rentprice;
-	private List<Integer> rentarea;
+	private Long rentprice;
 	private String namemanager;
 	private String numbermanager;
-	private List<String> renttype;
-	private Integer startid;
-	private Integer servicefee;
+	private Long servicefee;
 	
-	
-	public Integer getServicefee() {
-		return servicefee;
+	public Long getId() {
+		return id;
 	}
-	public void setServicefee(Integer servicefee) {
-		this.servicefee = servicefee;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public Integer getRentprice() {
-		return rentprice;
+	public String getName() {
+		return name;
 	}
-	public void setRentprice(Integer rentprice) {
-		this.rentprice = rentprice;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	public List<Integer> getRentarea() {
-		return rentarea;
-	}
-	public void setRentarea(List<Integer> rentarea) {
-		this.rentarea = rentarea;
-	}
-	public String getNamebuilding() {
-		return namebuilding;
-	}
-	public void setNamebuilding(String namebuilding) {
-		this.namebuilding = namebuilding;
-	}
-	public Integer getNumberofbasement() {
+	public Long getNumberofbasement() {
 		return numberofbasement;
 	}
-	public void setNumberofbasement(Integer numberofbasement) {
+	public void setNumberofbasement(Long numberofbasement) {
 		this.numberofbasement = numberofbasement;
 	}
 	public String getStreet() {
@@ -64,25 +47,16 @@ public class BuildingEntity {
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
-	
-	
-	public Integer getDistrictid() {
+	public Long getDistrictid() {
 		return districtid;
 	}
-	public void setDistrictid(Integer districtid) {
+	public void setDistrictid(Long districtid) {
 		this.districtid = districtid;
 	}
-	
-	public String getDistrictname() {
-		return districtname;
-	}
-	public void setDistrictname(String districtname) {
-		this.districtname = districtname;
-	}
-	public Integer getFloorarea() {
+	public Long getFloorarea() {
 		return floorarea;
 	}
-	public void setFloorarea(Integer floorarea) {
+	public void setFloorarea(Long floorarea) {
 		this.floorarea = floorarea;
 	}
 	public String getDirection() {
@@ -97,6 +71,12 @@ public class BuildingEntity {
 	public void setLevel(String level) {
 		this.level = level;
 	}
+	public Long getRentprice() {
+		return rentprice;
+	}
+	public void setRentprice(Long rentprice) {
+		this.rentprice = rentprice;
+	}
 	public String getNamemanager() {
 		return namemanager;
 	}
@@ -109,22 +89,11 @@ public class BuildingEntity {
 	public void setNumbermanager(String numbermanager) {
 		this.numbermanager = numbermanager;
 	}
-	
-	
-	
-	public List<String> getRenttype() {
-		return renttype;
+	public Long getServicefee() {
+		return servicefee;
 	}
-	public void setRenttype(List<String> renttype) {
-		this.renttype = renttype;
+	public void setServicefee(Long servicefee) {
+		this.servicefee = servicefee;
 	}
-	public Integer getStartid() {
-		return startid;
-	}
-	public void setStartid(Integer startid) {
-		this.startid = startid;
-	}
-	
-	
 	
 }

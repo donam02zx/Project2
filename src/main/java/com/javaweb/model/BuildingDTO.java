@@ -3,28 +3,22 @@ package com.javaweb.model;
 import java.util.List;
 
 public class BuildingDTO {
-	private String namebuilding;
+	private String name;
 	private String address;
-	private Integer numberofbasement;
+	private Long numberofbasement;
 	private String namemanager;
 	private String numbermanager;
-	private Integer floorarea;
-	private Integer rentprice;
-	private Integer servicefee;
-	private List<Integer> rentarea;
-	private List<String> renttype;
+	private Long floorarea;
+	private Long rentprice;
+	private Long servicefee;
+	private String rentarea;
+	private String renttype;
 	
-	public List<String> getRenttype() {
-		return renttype;
+	public String getName() {
+		return name;
 	}
-	public void setRenttype(List<String> renttype) {
-		this.renttype = renttype;
-	}
-	public String getNamebuilding() {
-		return namebuilding;
-	}
-	public void setNamebuilding(String namebuilding) {
-		this.namebuilding = namebuilding;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getAddress() {
 		return address;
@@ -32,10 +26,10 @@ public class BuildingDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Integer getNumberofbasement() {
+	public Long getNumberofbasement() {
 		return numberofbasement;
 	}
-	public void setNumberofbasement(Integer numberofbasement) {
+	public void setNumberofbasement(Long numberofbasement) {
 		this.numberofbasement = numberofbasement;
 	}
 	public String getNamemanager() {
@@ -50,32 +44,36 @@ public class BuildingDTO {
 	public void setNumbermanager(String numbermanager) {
 		this.numbermanager = numbermanager;
 	}
-	public Integer getFloorarea() {
+	public Long getFloorarea() {
 		return floorarea;
 	}
-	public void setFloorarea(Integer floorarea) {
+	public void setFloorarea(Long floorarea) {
 		this.floorarea = floorarea;
 	}
-	public Integer getRentprice() {
+	public Long getRentprice() {
 		return rentprice;
 	}
-	public void setRentprice(Integer rentprice) {
+	public void setRentprice(Long rentprice) {
 		this.rentprice = rentprice;
 	}
-	
-	public Integer getServicefee() {
+	public Long getServicefee() {
 		return servicefee;
 	}
-	public void setServicefee(Integer servicefee) {
+	public void setServicefee(Long servicefee) {
 		this.servicefee = servicefee;
 	}
-	public List<Integer> getRentarea() {
+	public String getRentarea() {
 		return rentarea;
 	}
-	public void setRentarea(List<Integer> rentarea) {
+	public void setRentarea(String rentarea) {
 		this.rentarea = rentarea;
 	}
-	
+	public String getRenttype() {
+		return renttype;
+	}
+	public void setRenttype(String renttype) {
+		this.renttype = renttype;
+	}
 	
 	
 }
