@@ -7,56 +7,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.customexceptions.FieldRequiredException;
 import com.javaweb.model.BuildingDTO;
+import com.javaweb.model.BuildingRequestDTO;
 import com.javaweb.model.ErrorResponseDTO;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.entity.BuildingEntity;
+import com.javaweb.repository.entity.DistrictEntity;
 import com.javaweb.service.BuildingService;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
 @RestController
+@PropertySource("classpath:application.properties")
 public class BuildingAPI {
-//	@GetMapping(value="/api/building/")
-//	public Object getBuilding(@RequestParam(value="name", required=false) String name,
-//							@RequestParam(value="numberOfBasement", required=false) String num,
-//							@RequestParam(value="street", required=false) String street) {
-//		try {
-//			System.out.print(5/0);
-//		} catch (Exception e) {
-//			ErrorResponseDTO errDTO = new ErrorResponseDTO();
-//			errDTO.setError(e.getMessage());
-//			List<String> details = new ArrayList<String>();
-//			details.add("Khong the chia so nguyen cho 0");
-//			errDTO.setDetails(details);
-//			return errDTO;
-//		}
-//		List<BuildingDTO> listBuiding = new ArrayList<>();
-//		BuildingDTO buidingDTO1 = new BuildingDTO();
-//		buidingDTO1.setName("buiding 1");
-//		buidingDTO1.setNumberOfBasement("1");
-//		buidingDTO1.setStreet("hoang van thu");
-//		BuildingDTO buidingDTO2 = new BuildingDTO();
-//		buidingDTO2.setName("buiding 2");
-//		buidingDTO2.setNumberOfBasement("2");
-//		buidingDTO2.setStreet("cmt8");
-//		listBuiding.add(buidingDTO1);
-//		listBuiding.add(buidingDTO2);
-//		return listBuiding;
-//		
-//	}
 	
 	@Autowired
 	private BuildingService buildingResponse;
 	
+	@Value("${dev.do}")
+	private String data;
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	@GetMapping(value="/api/building/")
 	public List<BuildingDTO> getBuilding(@RequestParam Map<String,Object> param,
@@ -65,19 +55,43 @@ public class BuildingAPI {
 		return result;
 	}
 	
+	@PostMapping(value="/api/building/")
+	@Transactional
+	public void creatBuilding(@RequestBody BuildingRequestDTO buildingRequest) {
+		BuildingEntity building = new BuildingEntity();
+		DistrictEntity district = new DistrictEntity();
+		building.setName(buildingRequest.getName());
+		building.setStreet(buildingRequest.getStreet());
+		building.setWard(buildingRequest.getWard());
+		district.setId(buildingRequest.getDistrictId());
+		building.setDistrict(district);
+		entityManager.persist(building);
+		System.out.println("ok");
+	}
+	
+	@PutMapping(value="/api/building/")
+	@Transactional
+	public void updateBuilding(@RequestBody BuildingRequestDTO buildingRequest) {
+		BuildingEntity building = new BuildingEntity();
+		building.setId(3L);
+		building.setName(buildingRequest.getName());
+		building.setWard(buildingRequest.getWard());
+		building.setStreet(buildingRequest.getStreet());
+		DistrictEntity districtEntity = new DistrictEntity();
+		districtEntity.setId(buildingRequest.getDistrictId());
+		building.setDistrict(districtEntity);
+		entityManager.merge(building);
+		System.out.println("oke");
+	}
+	
+	@DeleteMapping(value="/api/building/{id}")
+	@Transactional
+	public void deleteBuilding(@PathVariable Long id) {
+		BuildingEntity building = entityManager.find(BuildingEntity.class, id);
+		entityManager.remove(building);
+		System.out.println(data);
+	}
 	
 	
 	
-//	@PostMapping(value="/api/building/")
-//	public Object postBuilding(@RequestBody BuildingDTO buildingDto) {
-//		valid(buildingDto);
-//		
-//		return buildingDto;
-//	}
-//	
-//	public void valid(BuildingDTO buildingDto) {
-//		if(buildingDto.getName()==null||buildingDto.getNumberOfBasement()==null) {
-//			throw new FieldRequiredException("name or numberofbasement is null");
-//		}
-//	}
 }

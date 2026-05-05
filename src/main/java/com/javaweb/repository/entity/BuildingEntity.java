@@ -1,22 +1,85 @@
 package com.javaweb.repository.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+
+@Entity
+@Table(name="building")
 public class BuildingEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name="name")
 	private String name;
+	
+	@Column(name="numberofbasement")
 	private Long numberofbasement;
+	
+	@Column(name="street")
 	private String street;
+	
+	@Column(name="ward")
 	private String ward;
-	private Long districtid;
+	
+//	@Column(name="districtid")
+//	private Long districtid;
+	
+	@Column(name="floorarea")
 	private Long floorarea;
+	
+	@Column(name="direction")
 	private String direction;
+	
+	@Column(name="level")
 	private String level;
+	
+	@Column(name="rentprice")
 	private Long rentprice;
+	
+	@Column(name="namemanager")
 	private String namemanager;
+	
+	@Column(name="numbermanager")
 	private String numbermanager;
+	
+	@Column(name="servicefee")
 	private Long servicefee;
 	
+	@ManyToOne
+	@JoinColumn(name="districtid")
+	private DistrictEntity district;
+	
+	@OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
+	private List<RentareaEntity> items = new ArrayList<>();
+	
+	
+	
+	public List<RentareaEntity> getItems() {
+		return items;
+	}
+	public void setItems(List<RentareaEntity> items) {
+		this.items = items;
+	}
+	public DistrictEntity getDistrict() {
+		return district;
+	}
+	public void setDistrict(DistrictEntity district) {
+		this.district = district;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -47,12 +110,12 @@ public class BuildingEntity {
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
-	public Long getDistrictid() {
-		return districtid;
-	}
-	public void setDistrictid(Long districtid) {
-		this.districtid = districtid;
-	}
+//	public Long getDistrictid() {
+//		return districtid;
+//	}
+//	public void setDistrictid(Long districtid) {
+//		this.districtid = districtid;
+//	}
 	public Long getFloorarea() {
 		return floorarea;
 	}

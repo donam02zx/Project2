@@ -3,6 +3,9 @@ package com.javaweb.Utils;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+
 import com.mysql.jdbc.Connection;
 
 public class ConnectionJDBCUtil {
