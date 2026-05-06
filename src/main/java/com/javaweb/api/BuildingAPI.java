@@ -36,11 +36,15 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
 @RestController
+@Transactional
 @PropertySource("classpath:application.properties")
 public class BuildingAPI {
 	
 	@Autowired
 	private BuildingService buildingResponse;
+	
+	@Autowired
+	private BuildingRepository buildingRepository;
 	
 	@Value("${dev.do}")
 	private String data;
@@ -55,8 +59,14 @@ public class BuildingAPI {
 		return result;
 	}
 	
+	@GetMapping(value="/api/building/{name}")
+	public BuildingDTO getBuildingbyId(@PathVariable String name) {
+		BuildingDTO result = new BuildingDTO();
+		List<BuildingEntity> building = buildingRepository.findByNameContaining(name);
+		return result;
+	}
+	
 	@PostMapping(value="/api/building/")
-	@Transactional
 	public void creatBuilding(@RequestBody BuildingRequestDTO buildingRequest) {
 		BuildingEntity building = new BuildingEntity();
 		DistrictEntity district = new DistrictEntity();
@@ -70,26 +80,28 @@ public class BuildingAPI {
 	}
 	
 	@PutMapping(value="/api/building/")
-	@Transactional
 	public void updateBuilding(@RequestBody BuildingRequestDTO buildingRequest) {
-		BuildingEntity building = new BuildingEntity();
-		building.setId(3L);
+		BuildingEntity building = buildingRepository.findById(buildingRequest.getId()).get();
 		building.setName(buildingRequest.getName());
 		building.setWard(buildingRequest.getWard());
 		building.setStreet(buildingRequest.getStreet());
 		DistrictEntity districtEntity = new DistrictEntity();
 		districtEntity.setId(buildingRequest.getDistrictId());
 		building.setDistrict(districtEntity);
-		entityManager.merge(building);
+		buildingRepository.save(building);
 		System.out.println("oke");
 	}
 	
-	@DeleteMapping(value="/api/building/{id}")
-	@Transactional
-	public void deleteBuilding(@PathVariable Long id) {
-		BuildingEntity building = entityManager.find(BuildingEntity.class, id);
-		entityManager.remove(building);
-		System.out.println(data);
+//	@DeleteMapping(value="/api/building/{id}")
+//	public void deleteBuilding(@PathVariable Long id) {
+//		BuildingEntity building = entityManager.find(BuildingEntity.class, id);
+//		entityManager.remove(building);
+//		System.out.println(data);
+//	}
+	
+	@DeleteMapping(value="/api/building/{ids}")
+	public void deleteBuildingByStringDataJPA(@PathVariable Long[] ids) {
+		buildingRepository.deleteByIdIn(ids);
 	}
 	
 	

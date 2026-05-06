@@ -15,10 +15,10 @@ import com.javaweb.model.BuildingDTO;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.DistrictRepository;
 import com.javaweb.repository.RentareaRepository;
+import com.javaweb.repository.custom.impl.DistrictRepositoryImpl;
 import com.javaweb.repository.entity.BuildingEntity;
 import com.javaweb.repository.entity.DistrictEntity;
 import com.javaweb.repository.entity.RentareaEntity;
-import com.javaweb.repository.impl.DistrictRepositoryImpl;
 import com.javaweb.service.BuildingService;
 
 @Service
@@ -37,11 +37,11 @@ public class BuildingServiceImpl implements BuildingService{
 	public List<BuildingDTO> findAll(Map<String,Object> param, List<String> typeCode) {
 		List<BuildingDTO> result = new ArrayList<BuildingDTO>();
 		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(param, typeCode);
-		List<BuildingEntity> buildingEntities = buildingResponse.findAll(buildingSearchBuilder);
-		for(BuildingEntity item : buildingEntities) {
-			BuildingDTO building = buildingDTOConverter.toBuildingDTO(item);
-			result.add(building);
-		}
+		BuildingEntity buildingEntities = buildingResponse.findById(5L).get();
+//		for(BuildingEntity item : buildingEntities) {
+//			BuildingDTO building = buildingDTOConverter.toBuildingDTO(item);
+//			result.add(building);
+//		}
 		
 		return result;
 	}

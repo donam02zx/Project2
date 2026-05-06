@@ -1,4 +1,4 @@
-package com.javaweb.repository.impl;
+package com.javaweb.repository.custom.impl;
 
 import java.lang.reflect.Field;
 import java.sql.DriverManager;
@@ -30,7 +30,7 @@ import com.mysql.jdbc.Statement;
 @Repository
 @Primary
 @PropertySource("classpath:application.properties")
-public class BuildingRepositoryImpl implements BuildingRepository{	
+public class BuildingRepositoryImpl{	
 	
 	@Value("${spring.datasource.url}")
 	private String url;
@@ -130,7 +130,7 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 		}
 	}
 	
-	@Override
+	//@Override
 	public List<BuildingEntity> findAll(BuildingSearchBuilder buildingsearchbuilder) {
 		List<BuildingEntity> result = new ArrayList<BuildingEntity>();
 		StringBuilder sql = new StringBuilder("SELECT b.id, b.name, b.districtid, b.street, b.ward, b.numberofbasement, "
@@ -144,7 +144,7 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 		sql.append("Group By b.id ");
 		Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
 		
-		return query.getResultList();
+		return query.getResultList();		
 	}
 
 }

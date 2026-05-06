@@ -53,8 +53,14 @@ public class BuildingEntity {
 	@Column(name="namemanager")
 	private String namemanager;
 	
+//	@Column(name="managername")
+//	private String managername;
+	
 	@Column(name="numbermanager")
 	private String numbermanager;
+	
+//	@Column(name="managerphonenumber")
+//	private String managerphonenumber;
 	
 	@Column(name="servicefee")
 	private Long servicefee;
@@ -140,6 +146,23 @@ public class BuildingEntity {
 	public void setRentprice(Long rentprice) {
 		this.rentprice = rentprice;
 	}
+	
+//	public String getManagername() {
+//		return managername;
+//	}
+//	public void setManagername(String managername) {
+//		this.managername = managername;
+//	}
+//	public String getManagerphonenumber() {
+//		return managerphonenumber;
+//	}
+//	public void setManagerphonenumber(String managerphonenumber) {
+//		this.managerphonenumber = managerphonenumber;
+//	}
+	
+	public Long getServicefee() {
+		return servicefee;
+	}
 	public String getNamemanager() {
 		return namemanager;
 	}
@@ -151,9 +174,6 @@ public class BuildingEntity {
 	}
 	public void setNumbermanager(String numbermanager) {
 		this.numbermanager = numbermanager;
-	}
-	public Long getServicefee() {
-		return servicefee;
 	}
 	public void setServicefee(Long servicefee) {
 		this.servicefee = servicefee;
