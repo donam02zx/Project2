@@ -23,14 +23,14 @@ import com.javaweb.Utils.NumberUtil;
 import com.javaweb.Utils.StringUtil;
 import com.javaweb.builder.BuildingSearchBuilder;
 import com.javaweb.repository.BuildingRepository;
+import com.javaweb.repository.custom.BuildingRepositoryCustom;
 import com.javaweb.repository.entity.BuildingEntity;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
 @Repository
-@Primary
 @PropertySource("classpath:application.properties")
-public class BuildingRepositoryImpl{	
+public class BuildingRepositoryImpl implements BuildingRepositoryCustom{	
 	
 	@Value("${spring.datasource.url}")
 	private String url;

@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.javaweb.model.BuildingDTO;
+import com.javaweb.model.BuildingRequestDTO;
+import com.javaweb.repository.entity.BuildingEntity;
 
 public interface BuildingService {
 	List<BuildingDTO> findAll(Map<String,Object> param, List<String> typeCode);
-
-
+	void updateOrInsertBuilding(BuildingRequestDTO BuildingRequestDto);
+	void deleteBuilding(Long[] ids);
 }

@@ -50,17 +50,17 @@ public class BuildingEntity {
 	@Column(name="rentprice")
 	private Long rentprice;
 	
-	@Column(name="namemanager")
-	private String namemanager;
+//	@Column(name="namemanager")
+//	private String namemanager;
 	
-//	@Column(name="managername")
-//	private String managername;
+	@Column(name="managername")
+	private String managername;
 	
-	@Column(name="numbermanager")
-	private String numbermanager;
+//	@Column(name="numbermanager")
+//	private String numbermanager;
 	
-//	@Column(name="managerphonenumber")
-//	private String managerphonenumber;
+	@Column(name="managerphonenumber")
+	private String managerphonenumber;
 	
 	@Column(name="servicefee")
 	private Long servicefee;
@@ -147,34 +147,34 @@ public class BuildingEntity {
 		this.rentprice = rentprice;
 	}
 	
-//	public String getManagername() {
-//		return managername;
-//	}
-//	public void setManagername(String managername) {
-//		this.managername = managername;
-//	}
-//	public String getManagerphonenumber() {
-//		return managerphonenumber;
-//	}
-//	public void setManagerphonenumber(String managerphonenumber) {
-//		this.managerphonenumber = managerphonenumber;
-//	}
+	public String getManagername() {
+		return managername;
+	}
+	public void setManagername(String managername) {
+		this.managername = managername;
+	}
+	public String getManagerphonenumber() {
+		return managerphonenumber;
+	}
+	public void setManagerphonenumber(String managerphonenumber) {
+		this.managerphonenumber = managerphonenumber;
+	}
 	
 	public Long getServicefee() {
 		return servicefee;
 	}
-	public String getNamemanager() {
-		return namemanager;
-	}
-	public void setNamemanager(String namemanager) {
-		this.namemanager = namemanager;
-	}
-	public String getNumbermanager() {
-		return numbermanager;
-	}
-	public void setNumbermanager(String numbermanager) {
-		this.numbermanager = numbermanager;
-	}
+//	public String getNamemanager() {
+//		return namemanager;
+//	}
+//	public void setNamemanager(String namemanager) {
+//		this.namemanager = namemanager;
+//	}
+//	public String getNumbermanager() {
+//		return numbermanager;
+//	}
+//	public void setNumbermanager(String numbermanager) {
+//		this.numbermanager = numbermanager;
+//	}
 	public void setServicefee(Long servicefee) {
 		this.servicefee = servicefee;
 	}

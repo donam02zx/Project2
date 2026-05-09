@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.javaweb.builder.BuildingSearchBuilder;
 import com.javaweb.converter.BuildingDTOConverter;
+import com.javaweb.converter.BuildingEntityConverter;
 import com.javaweb.converter.BuildingSearchBuilderConverter;
 import com.javaweb.model.BuildingDTO;
+import com.javaweb.model.BuildingRequestDTO;
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.DistrictRepository;
 import com.javaweb.repository.RentareaRepository;
@@ -33,17 +35,41 @@ public class BuildingServiceImpl implements BuildingService{
 	@Autowired
 	private BuildingSearchBuilderConverter buildingSearchBuilderConverter;
 	
+	@Autowired
+	private BuildingEntityConverter buildingEntityConverter;
+	
+	
 	@Override
 	public List<BuildingDTO> findAll(Map<String,Object> param, List<String> typeCode) {
 		List<BuildingDTO> result = new ArrayList<BuildingDTO>();
 		BuildingSearchBuilder buildingSearchBuilder = buildingSearchBuilderConverter.toBuildingSearchBuilder(param, typeCode);
-		BuildingEntity buildingEntities = buildingResponse.findById(5L).get();
-//		for(BuildingEntity item : buildingEntities) {
-//			BuildingDTO building = buildingDTOConverter.toBuildingDTO(item);
-//			result.add(building);
-//		}
+		List<BuildingEntity> buildingEntities = buildingResponse.findAll(buildingSearchBuilder);
+		for(BuildingEntity item : buildingEntities) {
+			BuildingDTO building = buildingDTOConverter.toBuildingDTO(item);
+			result.add(building);
+		}
 		
 		return result;
 	}
+
+	@Override
+	public void updateOrInsertBuilding(BuildingRequestDTO buildingRequestDto) {
+		//Không request id thì Insert ngc lại thì Update
+		BuildingEntity building;
+		if(buildingRequestDto.getId()==null) {
+			building = new BuildingEntity();
+		}else {
+			building = buildingResponse.findById(buildingRequestDto.getId()).get();
+		}
+		building = buildingEntityConverter.toInsertOrUpdate(buildingRequestDto, building);
+		buildingResponse.save(building);
+	}
+
+	@Override
+	public void deleteBuilding(Long[] ids) {
+		buildingResponse.deleteByIdIn(ids);
+	}
+	
+	
 
 }
